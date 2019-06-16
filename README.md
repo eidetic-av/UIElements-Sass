@@ -51,7 +51,6 @@ $sizes: 40px, 50px, 80px
     
     Label
       font-size: $size / 2
-}
 ```
 It compiles to this:
 ```css
