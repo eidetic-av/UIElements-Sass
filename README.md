@@ -8,13 +8,16 @@ Nested rules, mixins, loops and other directives. You can learn more about Sass 
 By using Sass to write UIElements stylesheets instead of plain uss, you can write this:
 ```sass
 YourElement
+
     Slider
         margin-top: -10px
         height: 120px
+        
         #unity-tracker
             background-color: #898989
             margin-left: 2px
             width: 4px
+            
         #unity-dragger
             width: 35px
             height: 25px
@@ -46,6 +49,7 @@ $sizes: 40px, 50px, 80px
   .icon-#{$size}
     height: $size
     width: $size
+    
     Label
       font-size: $size / 2
 }
@@ -77,14 +81,49 @@ It compiles to this:
 }
 ```
 
+Sass inheritence is pretty cool too, and fits into the object-oriented Unity ecosystem:
+```sass
+%abstract-message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+  
+.error-message
+  @extend %abstract-message
+  border: 1px #f00
+  background-color: #fdd
+
+  &--serious
+    @extend .error-message
+    border-width: 3px
+```
+USS:
+```css
+.error-message, .error-message--serious {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.error-message, .error-message--serious {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error-message--serious {
+  border-width: 3px;
+}
+```
+
 ## Usage
+This idea is just a proof-of-concept, and I've only tested it on Windows but I can't see why it shouldn't work on other OS's.
+
 UIElements-Sass assumes you have a working sass command-line installation.
+
+If you're on Windows (assuming you have [Chocolately](https://chocolatey.org/)) , you can go `choco install sass`.
 
 If you're on MacOs, you can use [Homebrew](https://brew.sh/): `brew install sass/sass/sass` to download the latest dart-sass.
 
-And if you're on Windows (assuming you have [Chocolately](https://chocolatey.org/)) , you can go `choco install sass`.
-
-For other OSs go [here](https://sass-lang.com/install).
+For other OS's go [here](https://sass-lang.com/install).
 
 Once you've done that, clone this repo, add it as a submodule, or download the zip and extract it into your project.
 
