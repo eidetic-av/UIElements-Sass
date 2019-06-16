@@ -25,8 +25,8 @@ namespace Eidetic.Editor.Sass
 
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = "sass";
-                startInfo.Arguments = "--style expanded --cache-location " + Application.temporaryCachePath +
-                    + " --sourcemap=none " +
+                startInfo.Arguments = "--style expanded --cache-location " + Application.temporaryCachePath
+                    + " --sourcemap=none "
                     + fileName + ".sass " + fileName + ".css";
 
                 Process.Start(startInfo);
