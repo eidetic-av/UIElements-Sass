@@ -8,7 +8,6 @@ Nested rules, mixins, loops and other directives. You can learn more about Sass 
 By using Sass to write UIElements stylesheets instead of plain uss, you can write this:
 ```sass
 YourElement
-
     Slider
         margin-top: -10px
         height: 120px
