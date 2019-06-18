@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Diagnostics;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Schema;
+using SharpScss;
+using System.IO;
 
 namespace Eidetic.Editor.Sass
 {
@@ -20,16 +17,10 @@ namespace Eidetic.Editor.Sass
             foreach (var filePath in sassFilePaths)
             {
                 var fileName = filePath.Split('.')[0];
-
-                // Run sass from the command line
-
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "sass";
-                startInfo.Arguments = "--style expanded --cache-location " + Application.temporaryCachePath
-                    + " --sourcemap=none "
-                    + fileName + ".sass " + fileName + ".uss";
-
-                Process.Start(startInfo);
+                var result = Scss.ConvertFileToCss(fileName + ".sass", new ScssOptions() {
+                    GenerateSourceMap = false, OutputStyle = ScssOutputStyle.Expanded
+                });
+                File.WriteAllText(fileName + ".uss", result.Css);
             }
         }
     }
