@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Linq;
-using System.Diagnostics;
 using SharpScss;
 using System.IO;
 
@@ -12,7 +11,7 @@ namespace Eidetic.Editor.Sass
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
             var sassFilePaths = importedAssets
-                .Where(filePath => filePath.Split('.')[1] == "sass");
+                .Where(filePath => filePath.Split('.').Length > 1 && filePath.Split('.')[1] == "sass");
 
             foreach (var filePath in sassFilePaths)
             {
