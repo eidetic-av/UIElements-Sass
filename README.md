@@ -81,13 +81,13 @@ It compiles to this:
 
 Sass inheritence is pretty cool too, and fits into the object-oriented Unity ecosystem:
 ```sass
-%abstract-message
+%message
   border: 1px solid #ccc
   padding: 10px
   color: #333
   
 .error-message
-  @extend %abstract-message
+  @extend %message
   border: 1px #f00
   background-color: #fdd
 
