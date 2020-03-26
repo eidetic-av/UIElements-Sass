@@ -79,14 +79,54 @@ It compiles to this:
 }
 ```
 
+Sass inheritence is pretty cool too, and fits into the object-oriented Unity ecosystem:
+```sass
+%abstract-message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+  
+.error-message
+  @extend %abstract-message
+  border: 1px #f00
+  background-color: #fdd
+
+  &--serious
+    @extend .error-message
+    border-width: 3px
+```
+USS:
+```css
+.error-message, .error-message--serious {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.error-message, .error-message--serious {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error-message--serious {
+  border-width: 3px;
+}
+```
+
 ## Usage
-This only works on x64 Windows at the moment.
+This idea is just a proof-of-concept, and I've only tested it on Windows but I can't see why it shouldn't work on other OS's.
 
-It relies on [SharpScss](https://github.com/xoofx/SharpScss) and [libsass](https://github.com/sass/libsass), and I've only included dlls built for Windows x64, but it should work fine if you build these dlls for your own platform.
+UIElements-Sass assumes you have a working sass command-line installation.
 
-I'll probably include the libraries in for different platforms soon.
+If you're on Windows (assuming you have [Chocolately](https://chocolatey.org/)) , you can go `choco install sass`.
 
-A big thankyou to those two projects!
+If you're on MacOs, you can use [Homebrew](https://brew.sh/): `brew install sass/sass/sass` to download the latest dart-sass.
+
+For other OS's go [here](https://sass-lang.com/install).
+
+Once you've done that, clone this repo, add it as a submodule, or download the zip and extract it into your project.
+
+The compiler will be run every time a ".sass" file is created or altered inside your project, and the resulting ".uss" file will be placed alongside it in the same folder.
 
 ## To-do
-* Error checking if there is something wrong with the input sass file.
+* A terminal window appears on every compile, so it would be nice to hide this.
+* I know Unity runs it's own nodejs server for some tasks... it would be nice to be able to utilise this somehow so that we can use the node based sass instead of the command line wrapper.
